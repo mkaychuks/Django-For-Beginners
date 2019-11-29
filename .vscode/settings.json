@@ -1,0 +1,8 @@
+{
+    "python.pythonPath": "/home/sammy/.local/share/virtualenvs/RestFrameWork-sL4F0cMD/bin/python",
+    "python.linting.pycodestyleEnabled": false,
+    "python.linting.flake8Enabled": true,
+    "python.linting.enabled": false,
+    "python.linting.pylintEnabled": false,
+    "python.linting.pydocstyleEnabled": false
+}
