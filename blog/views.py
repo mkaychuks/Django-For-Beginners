@@ -1,6 +1,7 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 
 from .models import Post
@@ -71,7 +72,7 @@ class BlogUpdateView(UpdateView):
     model = Post
     fields = ['title', 'body']
     template_name = 'post_edit.html'
-    
+
 # Recreating the UpdateView using Function Based View
 def blogUpdateView(request, pk):
     form = PostForm()
@@ -86,3 +87,17 @@ def blogUpdateView(request, pk):
     context = {'form': form}
     template_name = 'post_edit.html'
     return render(request, template_name, context)
+
+
+
+
+class BlogDeleteView(DeleteView):
+    model = Post
+    template_name = 'post_delete.html'
+    success_url = reverse_lazy('home')
+
+# Recreating the DeleteView using Function Based View
+def blogDeleteView(request, pk):
+    post = get_object_or_404(Post, pk=pk)
+    post.delete()
+    return reverse_lazy('home')
