@@ -1,6 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
-from django.views.generic.edit import CreateView
+from django.views.generic.edit import CreateView, UpdateView
 
 
 from .models import Post
@@ -49,7 +49,7 @@ class BlogCreateView(CreateView):
     template_name = 'post_new.html'
     fields = ['author', 'title', 'body']
 
-
+# recreating BlogDetailView using Function-Based View...
 def blogCreateView(request):
     form = PostForm()
     if request.method == 'POST':
@@ -61,4 +61,28 @@ def blogCreateView(request):
         form = PostForm()
     context = {'form': form}
     template_name = 'post_new.html'
+    return render(request, template_name, context)
+
+
+
+
+
+class BlogUpdateView(UpdateView):
+    model = Post
+    fields = ['title', 'body']
+    template_name = 'post_edit.html'
+    
+# Recreating the UpdateView using Function Based View
+def blogUpdateView(request, pk):
+    form = PostForm()
+    post = get_object_or_404(Post, pk=pk)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', pk=pk)
+    else:
+        form = PostForm()
+    context = {'form': form}
+    template_name = 'post_edit.html'
     return render(request, template_name, context)
