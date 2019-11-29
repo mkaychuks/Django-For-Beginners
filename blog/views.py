@@ -24,6 +24,7 @@ class BlogDetailView(DetailView):
     template_name = 'post_detail.html'
     model = Post
 
+# recreating BlogDetailView using Function-Based View...
 def blogDetailView(request, pk):
     post = get_object_or_404(Post, pk=pk)
     template_name = 'post_detail.html'
