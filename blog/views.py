@@ -1,7 +1,10 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import CreateView
+
 
 from .models import Post
+from .forms import PostForm
 
 
 class BlogListView(ListView):
@@ -20,6 +23,8 @@ def blogListView(request):
 
 
 
+
+
 class BlogDetailView(DetailView):
     template_name = 'post_detail.html'
     model = Post
@@ -31,4 +36,29 @@ def blogDetailView(request, pk):
     context = {
         'post': post
     }
+    return render(request, template_name, context)
+
+
+
+
+
+
+
+class BlogCreateView(CreateView):
+    model = Post
+    template_name = 'post_new.html'
+    fields = ['author', 'title', 'body']
+
+
+def blogCreateView(request):
+    form = PostForm()
+    if request.method == 'POST':
+        form = PostForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', pk=pk)
+    else:
+        form = PostForm()
+    context = {'form': form}
+    template_name = 'post_new.html'
     return render(request, template_name, context)
