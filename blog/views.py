@@ -101,3 +101,7 @@ def blogDeleteView(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.delete()
     return reverse_lazy('home')
+
+
+
+

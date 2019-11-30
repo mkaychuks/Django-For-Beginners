@@ -6,7 +6,7 @@ from .views import (
     BlogDetailView, blogDetailView,
     BlogCreateView, blogCreateView,
     BlogUpdateView, blogUpdateView,
-    BlogDeleteView, blogDeleteView
+    BlogDeleteView, blogDeleteView,
 )
 
 # from imports in .views, I placed each CBV with
