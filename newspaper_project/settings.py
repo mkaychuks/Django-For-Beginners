@@ -40,10 +40,15 @@ INSTALLED_APPS = [
 
     'users.apps.UsersConfig',
     'pages.apps.PagesConfig',
+    'articles.apps.ArticlesConfig',
 
     # Third Party Installations
     'crispy_forms',
 ]
+
+
+TIME_ZONE = 'Nigeria/Lagos'
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
